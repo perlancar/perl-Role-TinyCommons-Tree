@@ -1,4 +1,4 @@
-package Role::TinyCommons::TreeNode;
+package Role::TinyCommons::Tree::Node;
 
 # DATE
 # VERSION
@@ -13,6 +13,9 @@ requires 'children';
 
 =head1 DESCRIPTION
 
+To minimize clash, utility methods are separated into a separate role
+L<Role::TinyCommons::Tree::NodeMethods>.
+
 
 =head1 REQUIRED METHODS
 
@@ -20,8 +23,6 @@ requires 'children';
 
 =head2 children => list of obj|arrayref of obj
 
-
-=head1 PROVIDE METHODS
 
 =head1 SEE ALSO
 
