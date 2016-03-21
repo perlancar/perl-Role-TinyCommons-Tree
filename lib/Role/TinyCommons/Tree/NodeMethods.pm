@@ -1,4 +1,4 @@
-package Role::TinyCommons::Tree::Node;
+package Role::TinyCommons::Tree::NodeMethods;
 
 # DATE
 # VERSION

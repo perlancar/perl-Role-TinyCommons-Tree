@@ -19,11 +19,8 @@ sub new_from_struct {
     if ($struct->{_children}) {
         my @children;
         for my $child_struct (@{ $struct->{_children} }) {
-            %child_args = map { $_ => $child_struct->{$_} }
-                grep {!/^_/} keys %$child_struct;
-            $child_args{_parent} = $node;
             push @children, $role_class->new_from_struct(
-                %child_args,
+                {%$child_struct, _parent => $node},
             );
         }
         $node->children(@children);
