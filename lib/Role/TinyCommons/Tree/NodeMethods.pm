@@ -192,6 +192,10 @@ L<Role::TinyCommons::Tree::Node>
 
 Return children and their children, recursively.
 
+=head2 walk($code)
+
+=head2 first_node($code) => obj|undef
+
 =head2 is_first_child => bool
 
 Return true if node is the first child of its parent.
@@ -204,12 +208,12 @@ Return true if node is the last child of its parent.
 
 Return true if node is the only child of its parent.
 
-=head2 is_nth_child => bool
+=head2 is_nth_child($n) => bool
 
 Return true if node is the I<n>th child of its parent (starts from 1 not 0, so
 C<is_first_child> is equivalent to C<is_nth_child(1)>).
 
-=head2 is_nth_last_child => bool
+=head2 is_nth_last_child($n) => bool
 
 Return true if node is the I<n>th last child of its parent.
 
@@ -224,9 +228,11 @@ Both C<node1> and C<node2> are first children of their respective type.
 
 =head2 is_last_child_of_type => bool
 
-=head2 is_nth_child_of_type => bool
+=head2 is_only_child_of_type => bool
 
-=head2 is_nth_last_child_of_type => bool
+=head2 is_nth_child_of_type($n) => bool
+
+=head2 is_nth_last_child_of_type($n) => bool
 
 =head2 prev_sibling => obj
 

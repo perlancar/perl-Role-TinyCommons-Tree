@@ -1,4 +1,15 @@
-Revision history for Role-TinyCommons-TreeNode
+Revision history for Role-TinyCommons-Tree
+
+0.02    2016-03-21 (PERLANCAR)
+
+        - [Incompatible change] Rename dist from Role-TinyCommons-TreeNode to
+          Role-TinyCommons-Tree. Rename role from Role::TinyCommons::TreeNode to
+          Role::TinyCommons::Tree::Node.
+
+        - Add role: Role::TinyCommons::Tree::NodeMethods.
+
+        - Add role: Role::TinyCommons::Tree::FromStruct.
+
 
 0.01    2016-03-19 (PERLANCAR)
 
