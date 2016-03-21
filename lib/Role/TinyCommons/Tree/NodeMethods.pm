@@ -23,6 +23,21 @@ sub descendants {
     (@c, map { $_->descendants } @c);
 }
 
+sub walk {
+    my ($self, $code) = @_;
+    for ($self->descendants) {
+        $code->($_);
+    }
+}
+
+sub first_node {
+    my ($self, $code) = @_;
+    for ($self->descendants) {
+        return $_ if $code->($_);
+    }
+    undef;
+}
+
 sub is_first_child {
     my $self = shift;
     my $parent = $self->parent;
@@ -68,7 +83,7 @@ sub is_first_child_of_type {
     my $parent = $self->parent;
     return 0 unless $parent;
     my $type = ref($self);
-    my @c = grep { ref($_) eq $type } $parent->_childen_as_list;
+    my @c = grep { ref($_) eq $type } $parent->_children_as_list;
     @c && refaddr($self) == refaddr($c[0]);
 }
 
@@ -77,7 +92,7 @@ sub is_last_child_of_type {
     my $parent = $self->parent;
     return 0 unless $parent;
     my $type = ref($self);
-    my @c = grep { ref($_) eq $type } $parent->_childen_as_list;
+    my @c = grep { ref($_) eq $type } $parent->_children_as_list;
     @c && refaddr($self) == refaddr($c[-1]);
 }
 
@@ -86,7 +101,7 @@ sub is_only_child_of_type {
     my $parent = $self->parent;
     return 0 unless $parent;
     my $type = ref($self);
-    my @c = grep { ref($_) eq $type } $parent->_childen_as_list;
+    my @c = grep { ref($_) eq $type } $parent->_children_as_list;
     @c == 1; # && refaddr($self) == refaddr($c[0]);
 }
 
@@ -95,7 +110,7 @@ sub is_nth_child_of_type {
     my $parent = $self->parent;
     return 0 unless $parent;
     my $type = ref($self);
-    my @c = grep { ref($_) eq $type } $parent->_childen_as_list;
+    my @c = grep { ref($_) eq $type } $parent->_children_as_list;
     @c >= $n && refaddr($self) == refaddr($c[$n-1]);
 }
 
@@ -104,7 +119,7 @@ sub is_nth_last_child_of_type {
     my $parent = $self->parent;
     return 0 unless $parent;
     my $type = ref($self);
-    my @c = grep { ref($_) eq $type } $parent->_childen_as_list;
+    my @c = grep { ref($_) eq $type } $parent->_children_as_list;
     @c >= $n && refaddr($self) == refaddr($c[-$n]);
 }
 
@@ -112,7 +127,7 @@ sub prev_sibling {
     my $self = shift;
     my $parent = $self->parent or return undef;
     my $refaddr = refaddr($self);
-    my @c = $parent->_childen_as_list;
+    my @c = $parent->_children_as_list;
     for my $i (1..$#c) {
         if (refaddr($c[$i]) == $refaddr) {
             return $c[$i-1];
@@ -125,7 +140,7 @@ sub prev_siblings {
     my $self = shift;
     my $parent = $self->parent or return ();
     my $refaddr = refaddr($self);
-    my @c = $parent->_childen_as_list;
+    my @c = $parent->_children_as_list;
     for my $i (1..$#c) {
         if (refaddr($c[$i]) == $refaddr) {
             return @c[0..$i-1];
@@ -138,10 +153,10 @@ sub next_sibling {
     my $self = shift;
     my $parent = $self->parent or return undef;
     my $refaddr = refaddr($self);
-    my @c = $parent->_childen_as_list;
+    my @c = $parent->_children_as_list;
     for my $i (0..$#c-1) {
         if (refaddr($c[$i]) == $refaddr) {
-            return $c[$i-1];
+            return $c[$i+1];
         }
     }
     undef;
@@ -151,7 +166,7 @@ sub next_siblings {
     my $self = shift;
     my $parent = $self->parent or return ();
     my $refaddr = refaddr($self);
-    my @c = $parent->_childen_as_list;
+    my @c = $parent->_children_as_list;
     for my $i (0..$#c-1) {
         if (refaddr($c[$i]) == $refaddr) {
             return @c[$i+1 .. $#c];
@@ -191,7 +206,8 @@ Return true if node is the only child of its parent.
 
 =head2 is_nth_child => bool
 
-Return true if node is the I<n>th child of its parent.
+Return true if node is the I<n>th child of its parent (starts from 1 not 0, so
+C<is_first_child> is equivalent to C<is_nth_child(1)>).
 
 =head2 is_nth_last_child => bool
 
