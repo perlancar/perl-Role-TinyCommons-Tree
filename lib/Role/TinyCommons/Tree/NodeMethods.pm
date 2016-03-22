@@ -11,7 +11,7 @@ with 'Role::TinyCommons::Tree::Node';
 BEGIN {
     no strict 'refs';
     require Code::Includable::Tree::NodeMethods;
-    for (grep {/\A\w+\z/} keys %Code::Includable::Tree::NodeMethods::) {
+    for (grep {/\A[a-z]\w+\z/} keys %Code::Includable::Tree::NodeMethods::) {
         *{$_} = \&{"Code::Includable::Tree::NodeMethods::$_"};
     }
 }

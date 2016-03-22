@@ -18,7 +18,6 @@ sub _children_as_list {
 sub descendants {
     my $self = shift;
     my @c = _children_as_list($self);
-    use DD; dd $self;
     (@c, map { descendants($_) } @c);
 }
 

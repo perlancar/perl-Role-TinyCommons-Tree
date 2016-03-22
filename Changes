@@ -1,5 +1,14 @@
 Revision history for Role-TinyCommons-Tree
 
+0.03    2016-03-22 (PERLANCAR)
+
+        - [Refactoring] Split node methods to
+          Code::Includable::Tree::NodeMethods for users that want to avoid
+          loading Role::Tiny.
+
+        - [doc] Add some more docs, including for the main module.
+
+
 0.02    2016-03-21 (PERLANCAR)
 
         - [Incompatible change] Rename dist from Role-TinyCommons-TreeNode to
