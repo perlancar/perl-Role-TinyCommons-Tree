@@ -175,75 +175,17 @@ sub next_siblings {
 }
 
 1;
-# ABSTRACT: Role that provides tree node methods
+# ABSTRACT: Tree node routines
+
+=for Pod::Coverage .+
 
 =head1 DESCRIPTION
 
+The routines in this module can be imported manually to your tree class/role.
+The only requirement is that your tree class supports C<parent> and C<children>
+methods.
 
-=head1 REQUIRED ROLES
+The routines can also be called as a normal function call, with your tree node
+object as the first argument, e.g.:
 
-L<Role::TinyCommons::Tree::Node>
-
-
-=head1 PROVIDED METHODS
-
-=head2 descendants => list
-
-Return children and their children, recursively.
-
-=head2 walk($code)
-
-=head2 first_node($code) => obj|undef
-
-=head2 is_first_child => bool
-
-Return true if node is the first child of its parent.
-
-=head2 is_last_child => bool
-
-Return true if node is the last child of its parent.
-
-=head2 is_only_child => bool
-
-Return true if node is the only child of its parent.
-
-=head2 is_nth_child($n) => bool
-
-Return true if node is the I<n>th child of its parent (starts from 1 not 0, so
-C<is_first_child> is equivalent to C<is_nth_child(1)>).
-
-=head2 is_nth_last_child($n) => bool
-
-Return true if node is the I<n>th last child of its parent.
-
-=head2 is_first_child_of_type => bool
-
-Return true if node is the first child (of its type) of its parent. For example,
-if the parent's children are ():
-
- node1(T1) node2(T2) node3(T1) node4(T2)
-
-Both C<node1> and C<node2> are first children of their respective type.
-
-=head2 is_last_child_of_type => bool
-
-=head2 is_only_child_of_type => bool
-
-=head2 is_nth_child_of_type($n) => bool
-
-=head2 is_nth_last_child_of_type($n) => bool
-
-=head2 prev_sibling => obj
-
-=head2 prev_siblings => list
-
-=head2 next_sibling => obj
-
-=head2 next_siblings => list
-
-
-=head1 SEE ALSO
-
-L<Role::TinyCommons::Tree::Node>
-
-L<Role::TinyCommons>
+ next_siblings($node)
