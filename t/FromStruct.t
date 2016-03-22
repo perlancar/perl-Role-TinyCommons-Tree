@@ -35,4 +35,7 @@ is_deeply($tree, $exp_tree) or do {
     diag "expected tree: ", explain $exp_tree;
 };
 
+# XXX test _args
+# XXX test _constructor
+
 done_testing;

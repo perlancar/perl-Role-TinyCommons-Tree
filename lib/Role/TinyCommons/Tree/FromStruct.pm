@@ -10,9 +10,17 @@ sub new_from_struct {
     my $struct = shift;
 
     my $wanted_class = $struct->{_class} || $role_class;
-    my %args = map { $_ => $struct->{$_} } grep {!/^_/} keys %$struct;
 
-    my $node = $wanted_class->new(%args);
+    my @args;
+    if ($struct->{_args}) {
+        @args = @{ $struct->{_args} };
+    } else {
+        @args = map { $_ => $struct->{$_} } grep {!/^_/} keys %$struct;
+    }
+
+    my $constructor = $struct->{_constructor} || "new";
+
+    my $node = $wanted_class->$constructor(@args);
 
     $node->parent($struct->{_parent}) if $struct->{_parent};
 
