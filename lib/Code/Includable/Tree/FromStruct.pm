@@ -49,3 +49,9 @@ The routines can also be called as a normal function call, with your tree node
 object as the first argument, e.g.:
 
  new_from_struct($class, $struct)
+
+
+=head1 SEE ALSO
+
+L<Role::TinyCommons::Tree::FromStruct> if you want to use the routines in this
+module via consuming role.
