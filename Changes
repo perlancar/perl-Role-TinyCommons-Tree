@@ -1,5 +1,14 @@
 Revision history for Role-TinyCommons-Tree
 
+0.05    2016-03-23 (PERLANCAR)
+
+	- No functional changes.
+
+	- [dist] Remove unneeded dzil plugin (copy-paste mistake).
+
+	- Add mentions in See Also.
+
+
 0.04    2016-03-23 (PERLANCAR)
 
         - [Refactoring] Split routines in Role::TinyCommons::Tree::FromStruct to
