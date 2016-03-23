@@ -11,7 +11,10 @@ use Scalar::Util ();
 sub _children_as_list {
     my $self = shift;
     my @c = $self->children;
-    @c = @{$c[0]} if @c==1 && ref($c[0]) eq 'ARRAY';
+    if (@c == 1) {
+        return () unless defined($c[0]);
+        return @{$c[0]} if ref($c[0]) eq 'ARRAY';
+    }
     @c;
 }
 
