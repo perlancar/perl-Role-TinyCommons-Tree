@@ -5,36 +5,12 @@ package Role::TinyCommons::Tree::FromStruct;
 
 use Role::Tiny;
 
-sub new_from_struct {
-    my $role_class = shift;
-    my $struct = shift;
-
-    my $wanted_class = $struct->{_class} || $role_class;
-
-    my @args;
-    if ($struct->{_args}) {
-        @args = @{ $struct->{_args} };
-    } else {
-        @args = map { $_ => $struct->{$_} } grep {!/^_/} keys %$struct;
+BEGIN {
+    no strict 'refs';
+    require Code::Includable::Tree::FromStruct;
+    for (grep {/\A[a-z]\w+\z/} keys %Code::Includable::Tree::FromStruct::) {
+        *{$_} = \&{"Code::Includable::Tree::FromStruct::$_"};
     }
-
-    my $constructor = $struct->{_constructor} || "new";
-
-    my $node = $wanted_class->$constructor(@args);
-
-    $node->parent($struct->{_parent}) if $struct->{_parent};
-
-    if ($struct->{_children}) {
-        my @children;
-        for my $child_struct (@{ $struct->{_children} }) {
-            push @children, $role_class->new_from_struct(
-                {%$child_struct, _parent => $node},
-            );
-        }
-        $node->children(@children);
-    }
-
-    $node;
 }
 
 1;
