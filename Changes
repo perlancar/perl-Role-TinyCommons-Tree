@@ -1,5 +1,10 @@
 Revision history for Role-TinyCommons-Tree
 
+0.06    2016-03-23 (PERLANCAR)
+
+	- Handle case when children() returns (undef).
+
+
 0.05    2016-03-23 (PERLANCAR)
 
 	- No functional changes.
