@@ -18,10 +18,18 @@ sub _children_as_list {
     @c;
 }
 
+sub _descendants {
+    my ($self, $res) = @_;
+    my @c = _children_as_list($self);
+    push @$res, @c;
+    for (@c) { _descendants($_, $res) }
+}
+
 sub descendants {
     my $self = shift;
-    my @c = _children_as_list($self);
-    (@c, map { descendants($_) } @c);
+    my $res = [];
+    _descendants($self, $res);
+    @$res;
 }
 
 sub walk {
