@@ -1,5 +1,5 @@
 package # hide from PAUSE
-    Local::Node;
+    Local::Node::Hash;
 
 # a hash-based tree node class
 
