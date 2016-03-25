@@ -5,6 +5,9 @@ use warnings;
 use Test::Exception;
 use Test::More 0.98;
 
+use Exporter qw(import);
+our @EXPORT_OK = qw(test_role_tinycommons_tree);
+
 sub test_role_tinycommons_tree {
     my %args = @_;
 
@@ -32,23 +35,31 @@ sub test_role_tinycommons_tree {
     subtest "Role::TinyCommons::Tree::NodeMethods" => sub {
         my $tree;
 
-        $tree = $c->new
+        my $ea = $args{fromstruct_extra_attribute} || 'id';
 
-            _from_struct({
-            id => 'root', _children => [
-                {id => 'a1', _children => [
-                    {id => 'b11'},
-                    {id => 'b12', _class=>$c2},
-                    {id => 'b13', _class=>$c2},
-                    {id => 'b14', _class=>'TN1'},
-                    {id => 'b15'},
+        $tree = $c->new_from_struct({
+            ( _instantiate => $args{code_instantiate} ) x
+                !!$args{code_instantiate},
+
+            $ea => 'root', _children => [
+                {$ea => 'a1', _children => [
+                    {$ea => 'b11'},
+                    {$ea => 'b12', _class=>$c2},
+                    {$ea => 'b13', _class=>$c2},
+                    {$ea => 'b14', _class=>$c1},
+                    {$ea => 'b15'},
                 ]},
-                {id => 'a2', _children => [
-            {id => 'b21', _class => 'TN2', _children => [
-                {id => 'c211', _class => 'TN1'},
-            ]},
-        ]},
-    ],
+                {$ea => 'a2', _children => [
+                    {$ea => 'b21', _class => $c2, _children => [
+                        {$ea => 'c211', _class => $c1},
+                    ]},
+                ]},
+            ],
+        });
+    } if $args{test_fromstruct};
+}
+
+=begin comment
 
 my %n; # nodes, key=id, val=obj
 $tree->walk(sub { $n{$_[0]{id}} = $_ });
@@ -118,7 +129,9 @@ is_deeply([$n{b13}->prev_siblings], [$n{b11}, $n{b12}], "prev_siblings [2]");
 is_deeply([$n{b13}->next_siblings], [$n{b14}, $n{b15}], "next_siblings [1]");
 is_deeply([$n{b15}->next_siblings], [], "next_siblings [2]");
 
-done_testing;
+=end comment
+
+=cut
 
 1;
 # ABSTRACT: Test suite for Role::TinyCommons::Tree
@@ -158,5 +171,25 @@ The main class to test.
 
 Whether to test class against L<Role::TinyCommons::Tree::FromStruct>. If you
 enable this, your class must consume the role.
+
+In addition to that, your class must also have another extra attribute (by
+default named C<id>, but configurable using the C<fromstruct_extra_attribute>
+argument). This attribute is used for testing and must hold an integer.
+
+If that attribute needs to be set during construction, and your constructor does
+not accept name-value pairs (C<< $class->new(id => ...) >>), or if your
+constructor is not named C<new>, then you'll need to supply C<code_instantiate>
+which will be passed C<<($class, \%attrs)>> so you can instantiate your object
+yourself.
+
+=item * fromstruct_extra_attribute => str
+
+Required if you enable C<test_fromstruct> (see C<test_fromstruct>).
+
+=item * code_instantiate => code
+
+Required if your constructor does not accept name-value pairs (C<<
+$class->new(id => ...) >>), or if your constructor is not named C<new>. Code
+will be supplied C<< ($class, \%attrs) >> and must return an object.
 
 =back
