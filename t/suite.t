@@ -10,6 +10,7 @@ use lib "$Bin/lib";
 use Local::Node;
 use Local::Node1;
 use Local::Node2;
+use Test::More 0.98;
 use Test::Role::TinyCommons::Tree qw(test_role_tinycommons_tree);
 
 test_role_tinycommons_tree(
@@ -17,7 +18,7 @@ test_role_tinycommons_tree(
     subclass1 => 'Local::Node1',
     subclass2 => 'Local::Node2',
 
-    test_fromstruct => 1,
-    fromstruct_extra_attribute => 'id',
+    test_fromstruct  => 1,
+    test_nodemethods => 1,
 );
 done_testing;
