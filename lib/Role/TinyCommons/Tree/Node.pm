@@ -21,7 +21,17 @@ L<Role::TinyCommons::Tree::NodeMethods>.
 
 =head2 parent => obj
 
+This must be an accessor, i.e. it must be able to set parent attribute using:
+
+ $obj->parent($parent)
+
 =head2 children => list of obj|arrayref of obj
+
+This must be an accessor, i.e. it must be able to set children attribute using:
+
+ $obj->children([$child1, ...])
+
+But for flexibility, it is allowed to return arrayref or list.
 
 
 =head1 SEE ALSO
