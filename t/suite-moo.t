@@ -3,6 +3,8 @@
 use 5.010001;
 use strict;
 use warnings;
+use Test::More 0.98;
+use Test::Requires 'Moo';
 
 use FindBin '$Bin';
 use lib "$Bin/lib";
@@ -10,7 +12,6 @@ use lib "$Bin/lib";
 use Local::Node::Moo;
 use Local::Node::Moo::Sub1;
 use Local::Node::Moo::Sub2;
-use Test::More 0.98;
 use Test::Role::TinyCommons::Tree qw(test_role_tinycommons_tree);
 
 test_role_tinycommons_tree(
