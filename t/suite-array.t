@@ -6,8 +6,8 @@ use warnings;
 use Test::More 0.98;
 #use Test::Requires 'Class::Build::Array::Glob'; # can't be used
 BEGIN {
-    unless (eval { require Class::Build::Array::Glob; 1 }) {
-        plan skip_all => "Class::Build::Array::Glob not availalbe";
+    unless (eval { require Tree::Object::Array::Glob; 1 }) {
+        plan skip_all => "Tree::Object::Array::Glob not availalbe";
     }
 }
 

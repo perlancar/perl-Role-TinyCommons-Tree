@@ -1,11 +1,7 @@
 package # hide from PAUSE
     Local::Node::Array;
 
-use Class::Build::Array::Glob;
-
-has id       => (is=>'rw');
-has parent   => (is=>'rw');
-has children => (is=>'rw', glob=>1);
+use Tree::Object::Array::Glob qw(id);
 
 use Role::Tiny::With;
 
