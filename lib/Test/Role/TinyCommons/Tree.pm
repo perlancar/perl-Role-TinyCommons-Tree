@@ -42,6 +42,7 @@ sub test_role_tinycommons_tree {
         my $struct = {
             ( _instantiate => $args{code_instantiate} ) x
                 !!$args{code_instantiate},
+            _pass_attributes => 0,
             _constructor => $m,
 
             $a1 => 0, _children => [
@@ -85,7 +86,7 @@ sub test_role_tinycommons_tree {
             $n0;
         };
 
-        is_deeply($tree, $exp_tree, "result");
+        is_deeply($tree, $exp_tree, "result") or diag explain $tree;
 
         $tree =
             Code::Includable::Tree::FromStruct::new_from_struct($c, $struct);

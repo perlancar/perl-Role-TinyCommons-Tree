@@ -23,9 +23,9 @@ sub new_from_struct {
         $node = $instantiate->($wanted_class, \%attrs);
     } else {
         if (!$pass_attributes) {
-            $node->$wanted_class->$constructor();
+            $node = $wanted_class->$constructor;
             for (keys %attrs) {
-                $node->$_->($attrs{$_});
+                $node->$_($attrs{$_});
             }
         } elsif ($pass_attributes eq 'hash') {
             $node = $wanted_class->$constructor(%attrs);
