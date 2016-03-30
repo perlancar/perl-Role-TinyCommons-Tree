@@ -32,6 +32,17 @@ sub descendants {
     @$res;
 }
 
+sub ancestors {
+    my $self = shift;
+    my @res;
+    my $p = $self->parent;
+    while ($p) {
+        push @res, $p;
+        $p = $p->parent;
+    }
+    @res;
+}
+
 sub walk {
     my ($self, $code) = @_;
     for (descendants($self)) {

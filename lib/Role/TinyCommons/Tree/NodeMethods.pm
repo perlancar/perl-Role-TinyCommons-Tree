@@ -31,7 +31,11 @@ L<Role::TinyCommons::Tree::Node>
 
 =head2 descendants => list
 
-Return children and their children, recursively.
+Return children and their children, recursively. See also: C<ancestors>.
+
+=head2 ancestors => list
+
+Return parent and parent's parent, recursively. See also: C<descendants>.
 
 =head2 walk($code)
 
