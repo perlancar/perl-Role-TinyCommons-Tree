@@ -1,5 +1,10 @@
 Revision history for Role-TinyCommons-Tree
 
+0.09    2016-04-02 (PERLANCAR)
+
+        - Add ancestors().
+
+
 0.08    2016-03-29 (PERLANCAR)
 
 	- Adjust tests for tree objects that do not accept setting
