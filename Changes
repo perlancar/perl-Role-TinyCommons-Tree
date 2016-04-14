@@ -1,5 +1,10 @@
 Revision history for Role-TinyCommons-Tree
 
+0.10    2016-04-14 (PERLANCAR)
+
+	- Add test with Class::InsideOut-based nodes.
+
+
 0.09    2016-04-02 (PERLANCAR)
 
         - Add ancestors().
