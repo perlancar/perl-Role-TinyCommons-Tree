@@ -3,6 +3,11 @@ package Code::Includable::Tree::FromStruct;
 # DATE
 # VERSION
 
+our $GET_PARENT_METHOD = 'parent';
+our $GET_CHILDREN_METHOD = 'children';
+our $SET_PARENT_METHOD = 'parent';
+our $SET_CHILDREN_METHOD = 'children';
+
 sub new_from_struct {
     my $class = shift;
     my $struct = shift;
@@ -37,7 +42,7 @@ sub new_from_struct {
     }
 
     # connect node to parent
-    $node->parent($struct->{_parent}) if $struct->{_parent};
+    $node->$SET_PARENT_METHOD($struct->{_parent}) if $struct->{_parent};
 
     # create children
     if ($struct->{_children}) {
@@ -58,7 +63,7 @@ sub new_from_struct {
             );
         }
         # connect node to children
-        $node->children(\@children);
+        $node->$SET_CHILDREN_METHOD(\@children);
     }
 
     $node;
@@ -80,6 +85,29 @@ object as the first argument, e.g.:
 
 The full documentation about the routines is in
 L<Role::TinyCommons::Tree::FromStruct>.
+
+
+=head1 VARIABLES
+
+=head2 $GET_PARENT_METHOD => str (default: parent)
+
+The method names C<parent> can actually be customized by (locally) setting this
+variable and/or C<$SET_PARENT_METHOD>.
+
+=head2 $SET_PARENT_METHOD => str (default: parent)
+
+The method names C<parent> can actually be customized by (locally) setting this
+variable and/or C<$GET_PARENT_METHOD>.
+
+=head2 $GET_CHILDREN_METHOD => str (default: children)
+
+The method names C<children> can actually be customized by (locally) setting
+this variable and C<$SET_CHILDREN_METHOD>.
+
+=head2 $SET_CHILDREN_METHOD => str (default: children)
+
+The method names C<children> can actually be customized by (locally) setting
+this variable and C<$GET_CHILDREN_METHOD>.
 
 
 =head1 SEE ALSO
