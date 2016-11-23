@@ -1,5 +1,16 @@
 Revision history for Role-TinyCommons-Tree
 
+0.11    2016-11-23 (PERLANCAR)
+
+	- Allow customizing get/set parent/children method names. This will add
+	  some overhead for the indirection (i.e. from $node->parent or
+	  $node->children(@foo) to $node->$GET_PARENT_METHOD or
+	  $node->$SET_CHILDREN_METHOD(@foo)). The overhead is around 40ns on my
+	  computer. Which should be worth it for the flexibility. In real-world
+	  use (e.g. in Data::CSel) the overall overhead will be around 1% or
+	  less.
+
+
 0.10    2016-04-14 (PERLANCAR)
 
 	- Add test with Class::InsideOut-based nodes.
