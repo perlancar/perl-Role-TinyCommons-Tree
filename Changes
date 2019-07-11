@@ -1,4 +1,4 @@
-0.11    2016-11-23 (PERLANCAR)
+0.11    2016-11-23  Released-By: PERLANCAR
 
 	- Allow customizing get/set parent/children method names. This will add
 	  some overhead for the indirection (i.e. from $node->parent or
@@ -9,17 +9,17 @@
 	  less.
 
 
-0.10    2016-04-14 (PERLANCAR)
+0.10    2016-04-14  Released-By: PERLANCAR
 
 	- Add test with Class::InsideOut-based nodes.
 
 
-0.09    2016-04-02 (PERLANCAR)
+0.09    2016-04-02  Released-By: PERLANCAR
 
         - Add ancestors().
 
 
-0.08    2016-03-29 (PERLANCAR)
+0.08    2016-03-29  Released-By: PERLANCAR
 
 	- Adjust tests for tree objects that do not accept setting
 	  attributes in constructor, like Tree::Object::Array* (because
@@ -29,7 +29,7 @@
 	  Tree::Object::Array::Glob.
 
 
-0.07    2016-03-26 (PERLANCAR)
+0.07    2016-03-26  Released-By: PERLANCAR
 
         - Make Tree::FromStruct role more generic (introduce _instantiate, work
           with non-hash-based objects).
@@ -41,19 +41,19 @@
           array-based class.
 
 
-0.06    2016-03-23 (PERLANCAR)
+0.06    2016-03-23  Released-By: PERLANCAR
 
 	- Handle case when children() returns (undef).
 
 
-0.05    2016-03-23 (PERLANCAR)
+0.05    2016-03-23  Released-By: PERLANCAR
 
 	- No functional changes.
 
 	- Add mentions in See Also.
 
 
-0.04    2016-03-23 (PERLANCAR)
+0.04    2016-03-23  Released-By: PERLANCAR
 
         - [Refactoring] Split routines in Role::TinyCommons::Tree::FromStruct to
           Code::Includable::Tree::NodeMethods so they can be used as normal sub
@@ -62,7 +62,7 @@
         - Add tests for Code::Includable::Tree::{NodeMethods,FromStruct}.
 
 
-0.03    2016-03-22 (PERLANCAR)
+0.03    2016-03-22  Released-By: PERLANCAR
 
         - [Refactoring] Split node methods in to
           Code::Includable::Tree::NodeMethods for users that want to avoid
@@ -71,7 +71,7 @@
         - [doc] Add some more docs, including for the main module.
 
 
-0.02    2016-03-21 (PERLANCAR)
+0.02    2016-03-21  Released-By: PERLANCAR
 
         - [Incompatible change] Rename dist from Role-TinyCommons-TreeNode to
           Role-TinyCommons-Tree. Rename role from Role::TinyCommons::TreeNode to
@@ -82,6 +82,6 @@
         - Add role: Role::TinyCommons::Tree::FromStruct.
 
 
-0.01    2016-03-19 (PERLANCAR)
+0.01    2016-03-19  Released-By: PERLANCAR
 
         - First release.
