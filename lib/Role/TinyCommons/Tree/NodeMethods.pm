@@ -87,6 +87,10 @@ Both C<node1> and C<node2> are first children of their respective type.
 
 =head2 next_siblings => list
 
+=head2 remove
+
+Remove node from its parent.
+
 
 =head1 SEE ALSO
 
