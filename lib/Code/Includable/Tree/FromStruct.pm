@@ -3,6 +3,7 @@ package Code::Includable::Tree::FromStruct;
 # DATE
 # VERSION
 
+use strict;
 our $GET_PARENT_METHOD = 'parent';
 our $GET_CHILDREN_METHOD = 'children';
 our $SET_PARENT_METHOD = 'parent';

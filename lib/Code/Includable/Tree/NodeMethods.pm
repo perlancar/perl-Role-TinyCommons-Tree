@@ -1,8 +1,11 @@
 package Code::Includable::Tree::NodeMethods;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
+use strict;
 our $GET_PARENT_METHOD = 'parent';
 our $GET_CHILDREN_METHOD = 'children';
 our $SET_PARENT_METHOD = 'parent';
@@ -198,6 +201,21 @@ sub next_siblings {
         }
     }
     ();
+}
+
+# remove self from parent
+sub remove {
+    my $self = shift;
+    my $parent = $self->$GET_PARENT_METHOD or return ();
+    my $refaddr = Scalar::Util::refaddr($self);
+    my @c;
+    for my $c (_children_as_list($parent)) {
+        if (Scalar::Util::refaddr($c) == $refaddr) {
+            next;
+        }
+        push @c, $c;
+    }
+    $self->$SET_CHILDREN_METHOD(\@c);
 }
 
 1;
