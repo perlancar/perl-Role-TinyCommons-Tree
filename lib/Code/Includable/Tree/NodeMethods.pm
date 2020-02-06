@@ -215,7 +215,7 @@ sub remove {
         }
         push @c, $c;
     }
-    $self->$SET_CHILDREN_METHOD(\@c);
+    $parent->$SET_CHILDREN_METHOD(\@c);
 }
 
 1;

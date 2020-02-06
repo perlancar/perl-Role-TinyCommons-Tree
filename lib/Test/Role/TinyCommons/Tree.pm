@@ -274,6 +274,23 @@ sub test_role_tinycommons_tree {
         is_deeply([Code::Includable::Tree::NodeMethods::next_siblings($n5)], [$n6, $n7], "next_siblings [1] (sub call)");
         is_deeply([Code::Includable::Tree::NodeMethods::next_siblings($n7)], []        , "next_siblings [2] (sub call)");
 
+        # remove
+        {
+            my @children;
+
+            Code::Includable::Tree::NodeMethods::remove($n8);
+            @children = $n2->children;
+            if (@children == 1 && ref $children[0] eq 'ARRAY') { @children = @{ $children[0] } }
+            is_deeply(\@children, [])
+                or diag explain \@children;
+
+            Code::Includable::Tree::NodeMethods::remove($n6);
+            @children = $n1->children;
+            if (@children == 1 && ref $children[0] eq 'ARRAY') { @children = @{ $children[0] } }
+            is_deeply(\@children, [$n3, $n4, $n5, $n7])
+                or diag explain \@children;
+        }
+
     } if $args{test_nodemethods};
 }
 
