@@ -235,6 +235,94 @@ object as the first argument, e.g.:
  next_siblings($node)
 
 
+=head1 FUNCTIONS
+
+=head2 ancestors
+
+Return a list of ancestors, from the direct parent upwards to the root.
+
+=head2 check
+
+Usage:
+
+ $node->check(\%opts)
+
+Check references in a tree: that all children refers back to the parent.
+Options:
+
+=over
+
+=item * recurse => bool
+
+=item * check_root => bool
+
+If set to true, will also check that parent is undef (meaning this node is a
+root node).
+
+=back
+
+=head2 descendants
+
+Return a list of descendents, from the direct children, to their children's
+children, and so on until all the leaf nodes.
+
+=head2 first_node
+
+Usage:
+
+ $node->first_node($coderef)
+
+Much like L<List::Util>'s C<first>. Will L</walk> the descendant nodes until the
+first coderef returns true, and return that.
+
+=head2 is_first_child
+
+=head2 is_first_child_of_type
+
+=head2 is_last_child
+
+=head2 is_last_child_of_type
+
+=head2 is_nth_child
+
+=head2 is_nth_child_of_type
+
+=head2 is_only_child
+
+=head2 is_only_child_of_type
+
+=head2 next_sibling
+
+Return the sibling node directly after this node.
+
+=head2 next_siblings
+
+Return all the next siblings of this node, from the one directly after to the
+last.
+
+=head2 prev_sibling
+
+Return the sibling node directly before this node.
+
+=head2 prev_siblings
+
+Return all the previous siblings of this node, from the first to the one
+directly before.
+
+=head2 remove
+
+Detach this node from its parent. Also set the parent of this node to undef.
+
+=head2 walk
+
+Usage:
+
+ $node->walk($coderef);
+
+Call C<$coderef> for all descendants (this means the self node is not included).
+$coderef will be passed the node.
+
+
 =head1 VARIABLES
 
 =head2 $GET_PARENT_METHOD => str (default: parent)
