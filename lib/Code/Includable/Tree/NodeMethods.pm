@@ -206,17 +206,45 @@ sub next_siblings {
 # remove self from parent
 sub remove {
     my $self = shift;
-    my $parent = $self->$GET_PARENT_METHOD or return ();
+    my $parent = $self->$GET_PARENT_METHOD or return;
     my $refaddr = Scalar::Util::refaddr($self);
-    my @c;
-    for my $c (_children_as_list($parent)) {
-        if (Scalar::Util::refaddr($c) == $refaddr) {
+    my @remaining_siblings;
+    for my $sibling (_children_as_list($parent)) {
+        if (Scalar::Util::refaddr($sibling) == $refaddr) {
+            $sibling->$SET_PARENT_METHOD(undef);
             next;
         }
-        push @c, $c;
+        push @remaining_siblings, $sibling;
     }
-    $parent->$SET_CHILDREN_METHOD(\@c);
+    $parent->$SET_CHILDREN_METHOD(\@remaining_siblings);
 }
+
+# check references
+sub check {
+    my $self = shift;
+    my $opts = shift // {};
+
+    if ($opts->{check_root}) {
+        my $parent = $self->$GET_PARENT_METHOD;
+        defined $parent and die "check: parent is not undef";
+    }
+
+    # check that all children refers back to me in their parent
+    my $refaddr = Scalar::Util::refaddr($self);
+    my $i = 0;
+    for my $child (_children_as_list($self)) {
+        my $childs_parent = $child->$GET_PARENT_METHOD;
+        unless (defined $childs_parent &&
+                    Scalar::Util::refaddr($childs_parent) == $refaddr) {
+            die "check: Child #$i of $self does not refer back to its parent";
+        }
+        check($child, {
+            recurse=>1,
+            #check_root=>0,
+        }) if $opts->{recurse};
+    }
+}
+
 
 1;
 # ABSTRACT: Tree node routines
