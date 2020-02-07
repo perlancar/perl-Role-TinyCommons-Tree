@@ -265,6 +265,8 @@ object as the first argument, e.g.:
 
 =head1 FUNCTIONS
 
+=for BEGIN_BLOCK: methods
+
 =head2 ancestors
 
 Return a list of ancestors, from the direct parent upwards to the root.
@@ -315,6 +317,10 @@ first coderef returns true, and return that.
 
 =head2 is_nth_child_of_type
 
+=head2 is_nth_last_child
+
+=head2 is_nth_last_child_of_type
+
 =head2 is_only_child
 
 =head2 is_only_child_of_type
@@ -349,6 +355,8 @@ Usage:
 
 Call C<$coderef> for all descendants (this means the self node is not included).
 $coderef will be passed the node.
+
+=for END_BLOCK: methods
 
 
 =head1 VARIABLES
