@@ -34,7 +34,7 @@ L<Role::TinyCommons::Tree::Node>
 
 =head1 SEE ALSO
 
-L<Code::Includable::Tree::FromStruct> if you want to use the routines in this
+L<Code::Includable::Tree::NodeMethods> if you want to use the routines in this
 module without consuming a role.
 
 L<Role::TinyCommons::Tree::Node>
