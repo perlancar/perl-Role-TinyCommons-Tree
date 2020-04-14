@@ -6,6 +6,8 @@ package Code::Includable::Tree::NodeMethods;
 # VERSION
 
 use strict;
+our $IGNORE_NO_CHILDREN_METHOD = 1;
+
 our $GET_PARENT_METHOD = 'parent';
 our $GET_CHILDREN_METHOD = 'children';
 our $SET_PARENT_METHOD = 'parent';
@@ -18,7 +20,16 @@ use Scalar::Util ();
 # like children, but always return list
 sub _children_as_list {
     my $self = shift;
-    my @children = $self->$GET_CHILDREN_METHOD;
+    my @children;
+    if ($IGNORE_NO_CHILDREN_METHOD) {
+        eval {
+            @children = $self->$GET_CHILDREN_METHOD;
+        };
+        return () if $@;
+    } else {
+        @children = $self->$GET_CHILDREN_METHOD;
+    }
+
     if (@children == 1) {
         return () unless defined($children[0]);
         return @{$children[0]} if ref($children[0]) eq 'ARRAY';
@@ -360,6 +371,11 @@ $coderef will be passed the node.
 
 
 =head1 VARIABLES
+
+=head2 $IGNORE_NO_CHILDREN_METHOD => bool (default: 1)
+
+If set to true (the default), when a node object does not support a "get
+children" method, we do not die and assume it does not have children.
 
 =head2 $GET_PARENT_METHOD => str (default: parent)
 
