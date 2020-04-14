@@ -1,6 +1,8 @@
 package Role::TinyCommons::Tree::Node;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use Role::Tiny;

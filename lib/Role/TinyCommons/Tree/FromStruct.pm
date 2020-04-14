@@ -1,6 +1,8 @@
 package Role::TinyCommons::Tree::FromStruct;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use Role::Tiny;

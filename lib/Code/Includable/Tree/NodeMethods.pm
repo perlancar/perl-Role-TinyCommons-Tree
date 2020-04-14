@@ -37,6 +37,7 @@ sub _children_as_list {
     @children;
 }
 
+# direct children first
 sub _descendants {
     my ($self, $res) = @_;
     my @children = _children_as_list($self);
@@ -48,6 +49,22 @@ sub descendants {
     my $self = shift;
     my $res = [];
     _descendants($self, $res);
+    @$res;
+}
+
+sub _descendants_depth_first {
+    my ($self, $res) = @_;
+    my @children = _children_as_list($self);
+    for (@children) {
+        push @$res, $_;
+        _descendants_depth_first($_, $res);
+    }
+}
+
+sub descendants_depth_first {
+    my $self = shift;
+    my $res = [];
+    _descendants_depth_first($self, $res);
     @$res;
 }
 
@@ -306,6 +323,30 @@ root node).
 
 Return a list of descendents, from the direct children, to their children's
 children, and so on until all the leaf nodes.
+
+For example, for this tree:
+
+ A
+ |-- B
+ |   |-- D
+ |   |-- E
+ |   `-- F
+ `-- C
+     |-- G
+     |   `-- I
+     `-- H
+
+the nodes returned for C<< descendants(A) >> would be:
+
+ B C D E F G H I
+
+=head2 descendants_depth_first
+
+Like L</descendants>, except will return in depth-first order. For example,
+using the same object in the L</descendants> example, C<<
+descendants_depth_first(A) >> will return:
+
+ B D E F C G I H
 
 =head2 first_node
 

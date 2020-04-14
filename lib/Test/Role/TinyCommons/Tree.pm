@@ -1,5 +1,10 @@
 package Test::Role::TinyCommons::Tree;
 
+# AUTHORITY
+# DATE
+# DIST
+# VERSION
+
 use strict;
 use warnings;
 use Test::Exception;
@@ -151,6 +156,13 @@ sub test_role_tinycommons_tree {
         is_deeply([Code::Includable::Tree::NodeMethods::descendants($n0)],
                   [$n1, $n2, $n3, $n4, $n5, $n6, $n7, $n8, $n9],
                   "descendants (sub call)");
+
+        is_deeply([$n0->descendants_depth_first],
+                  [$n1, $n3, $n4, $n5, $n6, $n7, $n2, $n8, $n9],
+                  "descendants_depth_first");
+        is_deeply([Code::Includable::Tree::NodeMethods::descendants_depth_first($n0)],
+                  [$n1, $n3, $n4, $n5, $n6, $n7, $n2, $n8, $n9],
+                  "descendants_depth_first (sub call)");
 
         # XXX test walk
 

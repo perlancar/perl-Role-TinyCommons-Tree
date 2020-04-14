@@ -1,6 +1,8 @@
 package Code::Includable::Tree::FromStruct;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use strict;
