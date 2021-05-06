@@ -21,7 +21,7 @@ BEGIN {
 1;
 # ABSTRACT: Role that provides methods to build tree object from data structure
 
-=head1 REQUIRED METHODS
+=head1 MIXED IN ROLES
 
 L<Role::TinyCommons::Tree::Node>
 
