@@ -23,7 +23,7 @@ BEGIN {
 
 =head1 MIXED IN ROLES
 
-L<Role::TinyCommons::Tree::Node>
+L<Role::TinyCommons::Tree::NodeMethods>
 
 
 =head1 PROVIDED METHODS
@@ -138,6 +138,9 @@ manually):
 
 L<Code::Includable::Tree::FromStruct> if you want to use the routines in this
 module without consuming a role.
+
+L<Role::TinyCommons::Tree::FromObjArray> if you want to build a tree of objects
+from a nested array of objects.
 
 L<Role::TinyCommons::Tree::Node>
 
