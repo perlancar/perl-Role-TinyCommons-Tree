@@ -150,6 +150,12 @@ sub test_role_tinycommons_tree {
                   [],
                   "ancestors (2) (sub call)");
 
+        is_deeply([$n9->retrieve_parent],
+                  [$n8],
+                  "retrieve_parent (1)");
+        ok( $n1->retrieve_parent, "retrieve_parent [1]");
+        # XXX more
+
         is_deeply([$n0->descendants],
                   [$n1, $n2, $n3, $n4, $n5, $n6, $n7, $n8, $n9],
                   "descendants");
@@ -285,6 +291,9 @@ sub test_role_tinycommons_tree {
         is_deeply([$n7->next_siblings], []        , "next_siblings [2] (sub call)");
         is_deeply([Code::Includable::Tree::NodeMethods::next_siblings($n5)], [$n6, $n7], "next_siblings [1] (sub call)");
         is_deeply([Code::Includable::Tree::NodeMethods::next_siblings($n7)], []        , "next_siblings [2] (sub call)");
+
+        ok( $n0->is_root, "is_root [0]");
+        ok(!$n1->is_root, "is_root [1]");
 
         # check
         {

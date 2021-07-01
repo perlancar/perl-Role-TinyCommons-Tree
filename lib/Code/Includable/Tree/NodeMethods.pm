@@ -79,6 +79,11 @@ sub ancestors {
     @res;
 }
 
+sub retrieve_parent {
+    my $self = shift;
+    $self->$GET_PARENT_METHOD;
+}
+
 sub walk {
     my ($self, $code) = @_;
     for (descendants($self)) {
@@ -231,6 +236,12 @@ sub next_siblings {
     ();
 }
 
+sub is_root {
+    my ($self, $n) = @_;
+    my $parent = $self->$GET_PARENT_METHOD;
+    return $parent ? 0:1;
+}
+
 # remove self from parent
 sub remove {
     my $self = shift;
@@ -298,6 +309,11 @@ object as the first argument, e.g.:
 =head2 ancestors
 
 Return a list of ancestors, from the direct parent upwards to the root.
+
+=head2 retrieve_parent
+
+Return direct parent. Basically a standard way to call "get parent" method, as
+the latter can be customized.
 
 =head2 check
 
@@ -394,6 +410,8 @@ Return the sibling node directly before this node.
 
 Return all the previous siblings of this node, from the first to the one
 directly before.
+
+=head2 is_root
 
 =head2 remove
 
