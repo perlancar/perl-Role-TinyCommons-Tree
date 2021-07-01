@@ -242,6 +242,24 @@ sub is_root {
     return $parent ? 0:1;
 }
 
+sub has_min_children {
+    my ($self, $m) = @_;
+    my @children = _children_as_list($self);
+    @children >= $m;
+}
+
+sub has_max_children {
+    my ($self, $n) = @_;
+    my @children = _children_as_list($self);
+    @children <= $n;
+}
+
+sub has_children_between {
+    my ($self, $m, $n) = @_;
+    my @children = _children_as_list($self);
+    @children >= $m && @children <= $n;
+}
+
 # remove self from parent
 sub remove {
     my $self = shift;
@@ -412,6 +430,18 @@ Return all the previous siblings of this node, from the first to the one
 directly before.
 
 =head2 is_root
+
+=head2 has_min_children(m)
+
+Only select nodes that have at least I<m> direct children.
+
+=head2 has_max_children(n)
+
+Only select nodes that have at most I<n> direct children.
+
+=head2 has_children_between(m, n)
+
+Only select nodes that have between I<m> and I<n> direct children.
 
 =head2 remove
 
