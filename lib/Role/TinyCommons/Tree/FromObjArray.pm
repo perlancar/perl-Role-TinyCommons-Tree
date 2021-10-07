@@ -1,12 +1,12 @@
 package Role::TinyCommons::Tree::FromObjArray;
 
+use Role::Tiny;
+use Role::Tiny::With;
+
 # AUTHORITY
 # DATE
 # DIST
 # VERSION
-
-use Role::Tiny;
-use Role::Tiny::With;
 
 with 'Role::TinyCommons::Tree::NodeMethods';
 
@@ -35,15 +35,31 @@ L<Role::TinyCommons::Tree::NodeMethods>
 Construct a tree of objects from a nested array of objects C<$obj_array>. The
 array must contain the root node object followed by zero or more children node
 objects. Each child can be directly followed by an arrayref to specify I<its>
-children. Examples:
+children. Example:
 
  [$root_node_obj]                                     # if there are no children nodes
 
  [$root_node_obj, [$child1_obj, $child2_obj]]         # if root node has two children
 
+The above tree can be visualized as follow:
+
+ $root_node_obj
+   ├─$child1_obj
+   └─$child2_obj
+
+Another example:
+
  [$root_node_obj, [
    $child1_obj, [$grandchild1_obj, $grandchild2_obj],
    $child2_obj]]                                      # if first child has two children of its own
+
+The above tree can be visualized as follow:
+
+ $root_node_obj
+   ├─$child1_obj
+   │   ├─$grandchild1_obj
+   │   └─$grandchild2_obj
+   └─$child2_obj
 
 A more complex example (C<$ABC>, C<$DEF>, and so on are all objects):
 
